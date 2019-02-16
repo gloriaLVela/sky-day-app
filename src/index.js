@@ -1,27 +1,46 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 
-// Use the color that is set in the parameters or props
+// Create the object skiData
 
-// The props are color, msg and minutes
+let skiData = {
+	total: 50,
+	powder: 20,
+	backcountry: 10,
+	goal: 100
+}
 
-class Message extends React.Component {
+// Create a component called a SkiDayCounter.
+
+class SkiDayCounter extends Component {
 	render() {
+        // The final thing I want to show you is we can use a slightly shorter syntax for destructuring this.props. 
+        // So I could say const, our props are total, power, backcountry and goal, equals this.props.
+		const {total, powder, backcountry, goal} = this.props
 		return (
-            <div>
-                <h1 style={{color: this.props.color}}>
-					{this.props.msg}
-				</h1>
-				<p>I'll check back in {this.props.minutes} minutes</p>
-			</div>
+			<section>
+				<div>
+					<p>Total Days: {total}</p>
+				</div>
+				<div>
+					<p>Powder Days: {powder}</p>
+				</div>
+				<div>
+					<p>Backcountry Days: {backcountry}</p>
+				</div>
+				<div>
+					<p>Goal: {goal}</p>
+				</div>
+			</section>
 		)
 	}
 }
 
-//Whenever we're passing in a number or a Boolean, something that's not a string, we need to use that JSX expression. 
-
-
-ReactDOM.render(
-	<Message color="blue" msg="how are you?" minutes={9}/>, 
+render(
+	<SkiDayCounter 
+		total={skiData.total}
+		powder={skiData.powder}
+		backcountry={skiData.backcountry}
+		goal={skiData.goal}/>, 
 	document.getElementById('root')
 )
