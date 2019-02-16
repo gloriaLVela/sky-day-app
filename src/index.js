@@ -10,21 +10,25 @@ let skiData = {
 	goal: 100
 }
 
+// Create components as functions if you're accessing props 
+// and if you want to add your custom methods outside of the context of that component.
+
+const getPercent = decimal => {
+	return decimal * 100 + '%'
+}
+const calcGoalProgress = (total, goal) => {
+	return getPercent(total/goal)
+}
+
 // Create a component called a SkiDayCounter.
 
-class SkiDayCounter extends Component {
-    getPercent = decimal => {
-		return decimal * 100 + '%'
-	}
-	calcGoalProgress = (total, goal) => {
-		return this.getPercent(total/goal)
-	}
-	render() {
-        // The final thing I want to show you is we can use a slightly shorter syntax for destructuring this.props. 
-        // So I could say const, our props are total, power, backcountry and goal, equals this.props.
-		const {total, powder, backcountry, goal} = this.props
-		return (
-			<section>
+
+// Destructure these properties so that you can access them by name. 
+// Use the curly braces to access these props by name.
+
+const SkiDayCounter = ({total, powder, backcountry, goal}) => {
+	return (
+		<section>
 				<div>
 					<p>Total Days: {total}</p>
 				</div>
@@ -35,12 +39,12 @@ class SkiDayCounter extends Component {
 					<p>Backcountry Days: {backcountry}</p>
 				</div>
 				<div>
-					<p>Goal Progress: {this.calcGoalProgress(total, goal)}</p>
+					<p>Goal Progress: {calcGoalProgress(total, goal)}</p>
 				</div>
-			</section>
-		)
-	}
+		</section>
+	)
 }
+
 
 render(
 	<SkiDayCounter 
@@ -50,3 +54,4 @@ render(
 		goal={skiData.goal}/>, 
 	document.getElementById('root')
 )
+
