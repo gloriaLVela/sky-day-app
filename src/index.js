@@ -13,6 +13,12 @@ let skiData = {
 // Create a component called a SkiDayCounter.
 
 class SkiDayCounter extends Component {
+    getPercent = decimal => {
+		return decimal * 100 + '%'
+	}
+	calcGoalProgress = (total, goal) => {
+		return this.getPercent(total/goal)
+	}
 	render() {
         // The final thing I want to show you is we can use a slightly shorter syntax for destructuring this.props. 
         // So I could say const, our props are total, power, backcountry and goal, equals this.props.
@@ -29,7 +35,7 @@ class SkiDayCounter extends Component {
 					<p>Backcountry Days: {backcountry}</p>
 				</div>
 				<div>
-					<p>Goal: {goal}</p>
+					<p>Goal Progress: {this.calcGoalProgress(total, goal)}</p>
 				</div>
 			</section>
 		)
